@@ -97,6 +97,7 @@ void solve(string str, int len)
             lastReverse = false;
 
         }
+        
         ol(str);
         os("ALICE "); ol(alicePay);
         os("BOB "); ol(bobPay);

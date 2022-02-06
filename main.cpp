@@ -59,7 +59,7 @@ void solve(string str, int len)
     int alicePay = 0, bobPay = 0;
     while(turns--)
     {
-        if(!isPalindrome && !lastReverse)
+        if(!isPalindrome(str, len) && !lastReverse)
         {
             reverse(str.begin(), str.end());
             if(isAlice)
@@ -98,9 +98,9 @@ void solve(string str, int len)
 
         }
         
-        ol(str);
-        os("ALICE "); ol(alicePay);
-        os("BOB "); ol(bobPay);
+        //ol(str);
+        //os("ALICE "); ol(alicePay);
+        //os("BOB "); ol(bobPay);
     }
 
     if(alicePay < bobPay) { ol("ALICE"); }

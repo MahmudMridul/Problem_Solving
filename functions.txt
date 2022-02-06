@@ -29,17 +29,52 @@
 
 using namespace std;
 
-void readArray(int arr[], int size)
+void read_array(int arr[], int size)
 {
     for(int i=0; i<size; ++i) { i1(arr[i]); }
 }
 
-void printArray(int arr[], int n)
+void read_vector(vector<int>& vec, int size)
+{
+    for(int i=0; i<size; ++i) { int x; i1(x); vec.push_back(x); }
+}
+
+void print_array(int arr[], int n)
 {
     for(int i=0; i<n; ++i) { os(arr[i]); } ol("");
 }
 
+void print_vector(vector<int>& vec, int size)
+{
+    for(int i=0; i<size; ++i) { os(vec[i]); } ol("");
+}
+
 bool isEven(int number) { if(number&1) { return false; } else { return true; } }
+
+int findMax(int arr[], int n)
+{
+    int max = -10000, index = 0;
+    for(int i=0; i<n; ++i)
+    {
+        if(max < arr[i]) 
+        {
+            max = arr[i];
+            index = i;
+        }
+    }
+    return index;
+}
+
+bool isPalindrome(string str, int len)
+{
+    int i = 0, j = len - 1;
+    while(i <= j)
+    {
+        if(str[i] != str[j]) { return false; }
+        ++i; --j;
+    }
+    return true;
+}
 
 int main() 
 {

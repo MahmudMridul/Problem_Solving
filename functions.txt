@@ -57,7 +57,7 @@ void print_vector(vector<int>& vec, int size)
 
 /* ************************ STRING ****************************** */
 
-bool isPalindrome(string str, int len)
+bool palindrome(string str, int len)
 {
     int i = 0, j = len - 1;
     while(i <= j)
@@ -68,9 +68,19 @@ bool isPalindrome(string str, int len)
     return true;
 }
 
+int zero_count_binarystring(string str, int len)
+{
+    int zero = 0;
+    for(int i=0; i<len; ++i)
+    {
+        if(str[i] == '0') { ++zero; }
+    }
+    return zero;
+}
+
 /* ************************ SINGLE NUMBER ****************************** */
 
-bool isEven(int number) { if(number&1) { return false; } else { return true; } }
+bool isodd(int number) { return (number&1); }
 
 
 /* ************************ LIST OF NUMBER ****************************** */

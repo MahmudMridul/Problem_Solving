@@ -30,17 +30,38 @@
 using namespace std;
 
 
-void readArray(int arr[], int size)
+void read_array(int arr[], int size)
 {
     for(int i=0; i<size; ++i) { i1(arr[i]); }
 }
 
-void printArray(int arr[], int n)
+void read_vector(vector<int>& vec, int size)
+{
+    for(int i=0; i<size; ++i) { int x; i1(x); vec.push_back(x); }
+}
+
+void print_array(int arr[], int n)
 {
     for(int i=0; i<n; ++i) { os(arr[i]); } ol("");
 }
 
-bool isPalindrome(string str, int len)
+void print_vector(vector<int>& vec, int size)
+{
+    for(int i=0; i<size; ++i) { os(vec[i]); } ol("");
+}
+
+
+int zero_count_binarystring(string str, int len)
+{
+    int zero = 0;
+    for(int i=0; i<len; ++i)
+    {
+        if(str[i] == '0') { ++zero; }
+    }
+    return zero;
+}
+
+bool palindrome(string str, int len)
 {
     int i = 0, j = len - 1;
     while(i <= j)
@@ -51,61 +72,21 @@ bool isPalindrome(string str, int len)
     return true;
 }
 
-void solve(string str, int len) 
+bool is_ap(int a, int b, int c)
 {
-    int turns = len;
-    bool lastReverse = false;
-    bool isAlice = true;
-    int alicePay = 0, bobPay = 0;
-    while(turns--)
+    return (abs(a - b) ==  abs(b - c)) && ((a <= b && b<=c) || (a >= b && b >= c)); 
+}
+
+void solve(int a, int b, int c) 
+{
+    if(is_ap(a, b, c))
     {
-        if(!isPalindrome(str, len) && !lastReverse)
-        {
-            reverse(str.begin(), str.end());
-            if(isAlice)
-            {
-                alicePay += 0;
-                isAlice = false;
-            }
-            else
-            {
-                bobPay += 0;
-                isAlice = true;
-            }
-            lastReverse = true;
-        }
-        else
-        {
-            bool hasZero = false;
-            for(int i=0; i<len; ++i)
-            {
-                if(str[i] == '0') { str[i] = '1'; hasZero = true; break; }
-            }
-
-            if(!hasZero) { break; }
-
-            if(isAlice)
-            {
-                alicePay += 1;
-                isAlice = false;
-            }
-            else
-            {
-                bobPay += 1;
-                isAlice = true;
-            }
-            lastReverse = false;
-
-        }
-        
-        //ol(str);
-        //os("ALICE "); ol(alicePay);
-        //os("BOB "); ol(bobPay);
+        ol("YES");
     }
-
-    if(alicePay < bobPay) { ol("ALICE"); }
-    else if(alicePay > bobPay) { ol("BOB"); }
-    else { ol("DRAW"); }
+    else 
+    {
+        
+    }
 }
 
 int main()
@@ -118,19 +99,14 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int test; 
+    int test, a, b, c;
     i1(test);
-    
+
     while(test--)
     {
-        int len;
-        i1(len);
-        string str;
-        i1(str);
-        solve(str, len);
+        i3(a, b, c);
+        solve(a, b, c);
     }
 
-
-    return 0;
 }
 

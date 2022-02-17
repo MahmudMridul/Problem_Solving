@@ -1,0 +1,9 @@
+void read_array(int arr[], int size)
+{
+    for(int i=0; i<size; ++i) { i1(arr[i]); }
+}
+
+void read_vector(vector<int>& vec, int size)
+{
+    for(int i=0; i<size; ++i) { int x; i1(x); vec.push_back(x); }
+}

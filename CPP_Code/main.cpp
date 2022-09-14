@@ -29,36 +29,40 @@
 
 using namespace std;
 
-
-void read_array(int arr[], int size)
+template<typename type>
+void readArray(type arr[], int size)
 {
     for(int i=0; i<size; ++i) { i1(arr[i]); }
 }
 
-void read_vector(vector<int>& vec, int size)
+template<typename type>
+void readVector(vector<type>& vec, int size)
 {
     for(int i=0; i<size; ++i) { int x; i1(x); vec.push_back(x); }
 }
 
-void print_array(int arr[], int n)
+template<typename type>
+void printArray(type arr[], int n)
 {
     for(int i=0; i<n; ++i) { os(arr[i]); } ol("");
 }
 
-void print_vector(vector<int>& vec, int size)
+template<typename type>
+void printVector(vector<type>& vec, int size)
 {
     for(int i=0; i<size; ++i) { os(vec[i]); } ol("");
 }
 
-void print_vecpair(vector< pair<int, int> >& vec, int size)
+template<typename type>
+void printVectorPair(vector< pair<type, type> >& vec, int size)
 {
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
 
-void solve(int a[], int size) 
+void solve(string p1[], string p2[], string p3[], int numofWords) 
 {
-    int freq[size];
+   printArray(p1, numofWords);
 }
 
 
@@ -72,27 +76,17 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    lli test, size;
+    lli test, numberofWords;
     i1(test);
 
     while(test--)
     {
-        i1(size);
-        int a[size];
-        read_array(a, size);
-
-        int query;
-        i1(query);
-        vector< pair<int, int> > step_in;
-
-
-        while(query--)
-        {
-            int index, step;
-            i2(index, step);
-            step_in.push_back({step, index});
-        }
-        solve(a, size);
+        i1(numberofWords);
+        string p1[numberofWords]; string p2[numberofWords]; string p3[numberofWords];
+        readArray(p1, numberofWords);
+        readArray(p2, numberofWords);
+        readArray(p3, numberofWords);
+        solve(p1, p2, p3, numberofWords);
     }
     
     return 0;

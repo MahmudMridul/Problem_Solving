@@ -1,5 +1,0 @@
-#compile program
-g++ file_name.cpp -o file_name
-
-#run program
-file_name.exe

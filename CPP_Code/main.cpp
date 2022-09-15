@@ -1,7 +1,7 @@
 //#pragma GCC optimize("Ofast")
 
 #include <bits/stdc++.h>
-#include <chrono>
+
 
 #define fast ios_base::sync_with_stdio(false)
 #define clr cin.tie(NULL)
@@ -67,62 +67,70 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
-
-void solve(set<string> p1, set<string> p2, set<string> p3, int numofWords) 
+lli canChange(string& line, lli lenofLine, lli half)
 {
-    int p1Points = 0;
-    int p2Points = 0;
-    int p3Points = 0;
-
-    set<string>::iterator iter1 = p1.begin();
-    set<string>::iterator iter2 = p2.begin();
-    set<string>::iterator iter3 = p3.begin();
-
-    while(iter1 != p1.end())
+    for(lli i = 0; i <= half; ++i)
     {
-        string word1 = *(iter1);
-        string word2 = *(iter2);
-        string word3 = *(iter3);
-
-        //For three points
-        if(!p2.count(word1) && p3.count(word1) != 1)
-        {
-            p1Points += 3;
-        }
-        if(!p1.count(word2) && !p3.count(word2))
-        {
-            p2Points += 3;
-        }
-        if(!p1.count(word3) && !p2.count(word3))
-        {
-            p3Points += 3;
-        }
-
-        //For one point
-        if((!p2.count(word1) && p3.count(word1)) || (p2.count(word1) && !p3.count(word1)))
-        {
-            p1Points += 1;
-        }
-        if((!p1.count(word2) && p3.count(word2)) || (p1.count(word2) && !p3.count(word2)))
-        {
-            p2Points += 1;
-        }
-        if((!p1.count(word3) && p2.count(word3)) || (p1.count(word3) && !p2.count(word3)))
-        {
-            p3Points += 1;
-        }
-
-
-        ++iter1;
-        ++iter2;
-        ++iter3;
+        if(line[i] == 'L') { line[i] = 'R'; return i; }
     }
 
-    os(p1Points);
-    os(p2Points);
-    ol(p3Points);
+    for(lli i = half; i < lenofLine; ++i)
+    {
+        if(line[i] == 'R') { line[i] = 'L'; return i; }
+    }
+
+    return -1;
 }
 
+lli calculateSum(string line, lli lenofLine)
+{
+    lli sum = 0;
+
+    for(int i = 0; i < lenofLine; ++i)
+    {
+        if(line[i] == 'L')
+        {
+            sum += i;
+        }
+        else
+        {
+            sum += (lenofLine - 1) - i;
+        }
+    }
+    return sum;
+}
+
+void solve(string line, lli lenofLine) 
+{
+    lli half = (half&1) == 1 ? lenofLine / 2 : (lenofLine / 2) - 1;
+    vector<lli> result(lenofLine); 
+
+    lli currentSum = calculateSum(line, lenofLine);
+
+    for(lli k = 1; k <= lenofLine; ++k)
+    {
+        lli index = canChange(line, lenofLine, half);
+        if(index != -1)
+        {
+            lli currentValue = 0, updatedValue = 0;
+            if(index <= half)
+            {
+                currentValue = index;
+                updatedValue = (lenofLine - 1) - index;
+            }
+            else
+            {
+                currentValue = (lenofLine - 1) - index;
+                updatedValue = index;
+            }
+            lli differece = abs(currentValue - updatedValue);
+            currentSum += differece;
+            result.push_back(currentSum);
+        }
+    }
+
+    printVector(result, lenofLine);
+}
 
 
 int main()
@@ -133,33 +141,26 @@ int main()
     #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
+    t_st
     #endif
 
-    #ifndef ONLINE_JUDGE
-    //clock_t startOverall = clock();
-    auto start = high_resolution_clock::now();
-    #endif
-
-    lli test, numberofWords;
+    lli test, lenofLine;
     i1(test);
 
     while(test--)
     {
-        i1(numberofWords);
-        set<string> p1; set<string> p2; set<string> p3;
-        readSet(p1, numberofWords);
-        readSet(p2, numberofWords);
-        readSet(p3, numberofWords);
-        solve(p1, p2, p3, numberofWords);
+        i1(lenofLine);
+        string line;
+        i1(line);
+
+        solve(line, lenofLine);
     }
 
     #ifndef ONLINE_JUDGE
-    //clock_t endOverall = clock();
-    auto end = high_resolution_clock::now();
-    //double durationOverall = double(endOverall-startOverall) / double(CLOCKS_PER_SEC); 
-    auto duration = duration_cast<milliseconds>(end - start);
-    printf("%.10f\n",duration);
+    t_en
+    t_p
     #endif
+
+
     return 0;
 }
-

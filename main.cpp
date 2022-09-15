@@ -153,7 +153,8 @@ int main()
         string line;
         i1(line);
 
-        solve(line, lenofLine);
+        //solve(line, lenofLine);
+        ol(line);
     }
 
     #ifndef ONLINE_JUDGE

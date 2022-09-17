@@ -126,6 +126,7 @@ int main()
         ol("Number of ouput generated and expected doesn't match");
         os("Number of output:"); ol(output.size());
         os("Expected number of output:"); ol(expected.size());
+        return 0;
     }
     
 

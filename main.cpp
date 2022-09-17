@@ -16,7 +16,7 @@
 #define max_pq(x) priority_queue<x>
 #define t_st clock_t start = clock();
 #define t_en clock_t stop = clock();
-#define t_p double duration = double(stop-start) / double(CLOCKS_PER_SEC); printf("%.10f\n",duration);
+#define t_p double duration = double(stop-start) / double(CLOCKS_PER_SEC); printf("RUNTIME: %.10f\n",duration);
 
 #define os(x) cout << x << " "
 #define o(x) cout << x
@@ -67,69 +67,25 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
-lli canChange(string& line, lli lenofLine, lli half)
+
+
+void solve(lli currentFloorFE, lli currentFloorSE, lli desFloorSE) 
 {
-    for(lli i = 0; i <= half; ++i)
+    lli firstElevetorTime = abs(currentFloorFE - 1);
+    lli secondElevetorTime = 0;
+
+    if(desFloorSE == 1)
     {
-        if(line[i] == 'L') { line[i] = 'R'; return i; }
+        secondElevetorTime = abs(desFloorSE - currentFloorSE);
+    }
+    else
+    {
+        secondElevetorTime = abs(currentFloorSE - desFloorSE) + abs(desFloorSE - 1);
     }
 
-    for(lli i = half; i < lenofLine; ++i)
-    {
-        if(line[i] == 'R') { line[i] = 'L'; return i; }
-    }
-
-    return -1;
-}
-
-lli calculateSum(string line, lli lenofLine)
-{
-    lli sum = 0;
-
-    for(int i = 0; i < lenofLine; ++i)
-    {
-        if(line[i] == 'L')
-        {
-            sum += i;
-        }
-        else
-        {
-            sum += (lenofLine - 1) - i;
-        }
-    }
-    return sum;
-}
-
-void solve(string line, lli lenofLine) 
-{
-    lli half = (half&1) == 1 ? lenofLine / 2 : (lenofLine / 2) - 1;
-    vector<lli> result(lenofLine); 
-
-    lli currentSum = calculateSum(line, lenofLine);
-
-    for(lli k = 1; k <= lenofLine; ++k)
-    {
-        lli index = canChange(line, lenofLine, half);
-        if(index != -1)
-        {
-            lli currentValue = 0, updatedValue = 0;
-            if(index <= half)
-            {
-                currentValue = index;
-                updatedValue = (lenofLine - 1) - index;
-            }
-            else
-            {
-                currentValue = (lenofLine - 1) - index;
-                updatedValue = index;
-            }
-            lli differece = abs(currentValue - updatedValue);
-            currentSum += differece;
-            result.push_back(currentSum);
-        }
-    }
-
-    printVector(result, lenofLine);
+    if(firstElevetorTime < secondElevetorTime) ol(1);
+    else if(firstElevetorTime > secondElevetorTime) ol(2);
+    else ol(3);
 }
 
 
@@ -144,22 +100,19 @@ int main()
     t_st
     #endif
 
-    lli test, lenofLine;
+    lli test, currentFloorFE, currentFloorSE, desFloorSE;
     i1(test);
 
     while(test--)
     {
-        i1(lenofLine);
-        string line;
-        i1(line);
-
-        //solve(line, lenofLine);
-        ol(line);
+        i3(currentFloorFE, currentFloorSE, desFloorSE);
+        solve(currentFloorFE, currentFloorSE, desFloorSE);
     }
 
     #ifndef ONLINE_JUDGE
     t_en
     t_p
+    fclose(stdin);
     #endif
 
 

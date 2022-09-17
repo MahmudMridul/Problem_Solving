@@ -1,8 +1,11 @@
-echo off
-setlocal
-set v=1
-echo %v%
-set /a v=v+1
-echo %v%
-for /l %%a in (expected.txt) do echo %%a
-endlocal
+@echo off
+echo Build started
+g++ checkOutput.cpp -o checkOutput && ( 
+    echo Build completed
+    echo Running...
+    checkOutput.exe 
+) || (
+    echo Build failed
+)
+
+

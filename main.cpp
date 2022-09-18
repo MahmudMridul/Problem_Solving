@@ -52,13 +52,21 @@ void readSet(set<type>& list, int size)
 template<typename type>
 void printArray(type arr[], int n)
 {
-    for(int i=0; i<n; ++i) { os(arr[i]); } ol("");
+    for(int i=0; i<n; ++i) 
+    {
+        if(i == n-1) { ol(arr[i]); }
+        else { os(arr[i]); } 
+    } 
 }
 
 template<typename type>
-void printVector(vector<type>& vec, int size)
+void printVector(vector<type>& vec, int n)
 {
-    for(int i=0; i<size; ++i) { os(vec[i]); } ol("");
+    for(int i=0; i<n; ++i) 
+    { 
+        if(i == n-1) { ol(vec[i]); }
+        else { os(vec[i]); } 
+    }
 }
 
 template<typename type>
@@ -69,23 +77,50 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
 
 
 
-void solve(lli currentFloorFE, lli currentFloorSE, lli desFloorSE) 
+void solve(string code, lli codeLen) 
 {
-    lli firstElevetorTime = abs(currentFloorFE - 1);
-    lli secondElevetorTime = 0;
+    string result = "";
 
-    if(desFloorSE == 1)
+    for(int ch = 0; ch < codeLen; ++ch)
     {
-        secondElevetorTime = abs(desFloorSE - currentFloorSE);
+        if(code[ch] >= '3' && code[ch] <= '9')
+        {
+            int id = code[ch] - '0';
+            char letter = 'a' + id - 1;
+            result += letter;
+        }
+        else if(code[ch] == '1') 
+        {
+            if(ch + 1 < codeLen && code[ch + 1] >= '1' && code[ch + 1] <= '9' && ch + 2 < codeLen && code[ch + 2] == '0')
+            {
+                string numSt = "" + '1' + code[ch + 1];
+                int num = stoi(numSt);
+                char letter = 'a' + num - 1;
+                result += letter;
+            }
+            else 
+            {
+                result += 'a';
+            }
+            ch += 2;
+        }
+        else
+        {
+            if(ch + 1 < codeLen && code[ch + 1] >= '1' && code[ch + 1] <= '6' && ch + 2 < codeLen && code[ch + 2] == '0')
+            {
+                string numSt = "" + '2' + code[ch + 1];
+                int num = stoi(numSt);
+                char letter = 'a' + num - 1;
+                result += letter;
+            }
+            else 
+            {
+                result += 'b';
+            }
+            ch += 2;
+        }
     }
-    else
-    {
-        secondElevetorTime = abs(currentFloorSE - desFloorSE) + abs(desFloorSE - 1);
-    }
-
-    if(firstElevetorTime < secondElevetorTime) ol(1);
-    else if(firstElevetorTime > secondElevetorTime) ol(2);
-    else ol(3);
+    ol(result);
 }
 
 
@@ -100,14 +135,20 @@ int main()
     t_st
     #endif
 
-    lli test, currentFloorFE, currentFloorSE, desFloorSE;
-    i1(test);
+    // lli test, codeLen;
+    // string code;
+    // i1(test);
 
-    while(test--)
-    {
-        i3(currentFloorFE, currentFloorSE, desFloorSE);
-        solve(currentFloorFE, currentFloorSE, desFloorSE);
-    }
+    // while(test--)
+    // {
+    //     i1(codeLen);
+    //     i1(code);
+    //     solve(code, codeLen);
+    // }
+
+    vector<int> nums = {1,2,3,4,5};
+    printVector(nums, 5);
+    printVector(nums, 5);
 
     #ifndef ONLINE_JUDGE
     t_en

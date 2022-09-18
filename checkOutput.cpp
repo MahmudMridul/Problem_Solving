@@ -29,7 +29,6 @@
 #define pi 3.1415926535897932384626433832795
 
 using namespace std;
-using namespace std::chrono;
 
 template<typename type>
 void readArray(type arr[], int size)
@@ -52,40 +51,27 @@ void readSet(set<type>& list, int size)
 template<typename type>
 void printArray(type arr[], int n)
 {
-    for(int i=0; i<n; ++i) { os(arr[i]); } ol("");
+    for(int i=0; i<n; ++i) 
+    {
+        if(i == n-1) { ol(arr[i]); }
+        else { os(arr[i]); } 
+    } 
 }
 
 template<typename type>
-void printVector(vector<type>& vec, int size)
+void printVector(vector<type>& vec, int n)
 {
-    for(int i=0; i<size; ++i) { os(vec[i]); } ol("");
+    for(int i=0; i<n; ++i) 
+    { 
+        if(i == n-1) { ol(vec[i]); }
+        else { os(vec[i]); } 
+    }
 }
 
 template<typename type>
 void printVectorPair(vector< pair<type, type> >& vec, int size)
 {
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
-}
-
-
-
-void solve(lli currentFloorFE, lli currentFloorSE, lli desFloorSE) 
-{
-    lli firstElevetorTime = abs(currentFloorFE - 1);
-    lli secondElevetorTime = 0;
-
-    if(desFloorSE == 1)
-    {
-        secondElevetorTime = abs(desFloorSE - currentFloorSE);
-    }
-    else
-    {
-        secondElevetorTime = abs(currentFloorSE - desFloorSE) + abs(desFloorSE - 1);
-    }
-
-    if(firstElevetorTime < secondElevetorTime) ol(1);
-    else if(firstElevetorTime > secondElevetorTime) ol(2);
-    else ol(3);
 }
 
 
@@ -101,6 +87,10 @@ int main()
 
     while(getline(cin, str))
     {
+        if(str.find("\n") != string :: npos)
+        {
+            str.erase(str.size() - 1, 1);
+        }
         expected.push_back(str);
     }
     cin.clear();
@@ -111,6 +101,10 @@ int main()
 
     while(getline(cin, str))
     {
+        if(str.find("\n") != string :: npos)
+        {
+            str.erase(str.size() - 1, 1);
+        }
         output.push_back(str);
     }
     cin.clear();

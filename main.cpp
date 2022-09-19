@@ -2,7 +2,6 @@
 
 #include <bits/stdc++.h>
 
-
 #define fast ios_base::sync_with_stdio(false)
 #define clr cin.tie(NULL)
 
@@ -12,8 +11,10 @@
 #define i4(w,x,y,z) cin >> w >> x >> y >> z
 #define i5(w,x,y,z,a) cin >> w >> x >> y >> z >> a
 #define i6(w,x,y,z,a,b) cin >> w >> x >> y >> z >> a >> b
+
 #define min_pq(x) priority_queue<x, vector<x>, greater<x> >
 #define max_pq(x) priority_queue<x>
+
 #define t_st clock_t start = clock();
 #define t_en clock_t stop = clock();
 #define t_p double duration = double(stop-start) / double(CLOCKS_PER_SEC); printf("RUNTIME: %.10f\n",duration);
@@ -29,7 +30,6 @@
 #define pi 3.1415926535897932384626433832795
 
 using namespace std;
-using namespace std::chrono;
 
 template<typename type>
 void readArray(type arr[], int size)
@@ -75,52 +75,67 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
-
-
-void solve(string code, lli codeLen) 
+int minimum(vector<int> arr, int size)
 {
-    string result = "";
-
-    for(int ch = 0; ch < codeLen; ++ch)
+    int min = 5000;
+    int minIndex = -1;
+    for(int i = 0; i<size; ++i)
     {
-        if(code[ch] >= '3' && code[ch] <= '9')
+        if(arr[i] < min)
         {
-            int id = code[ch] - '0';
-            char letter = 'a' + id - 1;
-            result += letter;
-        }
-        else if(code[ch] == '1') 
-        {
-            if(ch + 1 < codeLen && code[ch + 1] >= '1' && code[ch + 1] <= '9' && ch + 2 < codeLen && code[ch + 2] == '0')
-            {
-                string numSt = "" + '1' + code[ch + 1];
-                int num = stoi(numSt);
-                char letter = 'a' + num - 1;
-                result += letter;
-            }
-            else 
-            {
-                result += 'a';
-            }
-            ch += 2;
-        }
-        else
-        {
-            if(ch + 1 < codeLen && code[ch + 1] >= '1' && code[ch + 1] <= '6' && ch + 2 < codeLen && code[ch + 2] == '0')
-            {
-                string numSt = "" + '2' + code[ch + 1];
-                int num = stoi(numSt);
-                char letter = 'a' + num - 1;
-                result += letter;
-            }
-            else 
-            {
-                result += 'b';
-            }
-            ch += 2;
+            min = arr[i];
+            minIndex = i;
         }
     }
-    ol(result);
+    return minIndex;
+}
+
+int maximum(vector<int> arr, int size)
+{
+    int max = -5000;
+    int maxIndex = -1;
+    for(int i = 0; i<size; ++i)
+    {
+        if(arr[i] > max)
+        {
+            max = arr[i];
+            maxIndex = i;
+        }
+    }
+    return maxIndex;
+}
+
+
+void solve(vector<int> arr, int size) 
+{
+    if(size == 1) 
+    {
+        ol(0);
+        return;
+    }
+
+    int minIndex = minimum(arr, size);
+    int maxIndex = maximum(arr, size);
+
+    if(minIndex == 0 && maxIndex == size - 1)
+    {
+        ol(arr[maxIndex] - arr[minIndex]);
+        return;
+    }
+    if(maxIndex + 1 == minIndex)
+    {
+        ol(arr[maxIndex] - arr[minIndex]);
+        return;
+    }
+    if(maxIndex + 1 < size && arr[minIndex] == arr[maxIndex + 1])
+    {
+        ol(arr[maxIndex] - arr[minIndex]);
+        return;
+    }
+
+    int maxPossible = max(arr[maxIndex] - arr[0], arr[size - 1] - arr[minIndex]);
+    ol(maxPossible);
+
 }
 
 
@@ -135,25 +150,22 @@ int main()
     t_st
     #endif
 
-    // lli test, codeLen;
-    // string code;
-    // i1(test);
 
-    // while(test--)
-    // {
-    //     i1(codeLen);
-    //     i1(code);
-    //     solve(code, codeLen);
-    // }
+    int test, size;
+    i1(test);
 
-    vector<int> nums = {1,2,3,4,5};
-    printVector(nums, 5);
-    printVector(nums, 5);
+    while(test--)
+    {
+        vector<int> arr;
+        //int arr[size]; 
+        i1(size);
+        readVector(arr, size);
+        solve(arr, size);
+    }
 
     #ifndef ONLINE_JUDGE
     t_en
     t_p
-    fclose(stdin);
     #endif
 
 

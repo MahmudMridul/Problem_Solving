@@ -123,21 +123,27 @@ int main()
         return 0;
     }
     
+    int count = 0;
 
     for(int test = 0; test < output.size(); ++test)
     {
         if(output[test] == expected[test])
         {
-            os("Test case :");
-            os(test + 1);
-            ol("PASSED");
+            ++count;
         }
         else 
         {
-            os("Test case :");
-            os(test + 1);
-            ol("FAILED");
+            ol(".");
+            os("[Test case] :"); os(test + 1); ol("\t[FAILED]");
+            os("[Ouput] :"); ol(output[test]);
+            os("[Expected] :"); ol(expected[test]);
+            ol(".");
         }
+    }
+
+    if(count == output.size())
+    {
+        ol("[ALL TESTS PASSED]");
     }
 
 

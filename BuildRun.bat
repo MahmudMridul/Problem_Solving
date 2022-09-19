@@ -1,12 +1,12 @@
 @echo off
+
+set fileName=%1
+
 echo Build started
-g++ main.cpp -o main && ( 
+g++ %fileName% -o currentFile && ( 
     echo Build completed
     echo Running...
-    main.exe
-    echo =====OUTPUT=====
-    for /f "tokens=* delims=" %%x in (output.txt) do echo %%x
-    echo ================
+    currentFile.exe
 ) || (
     echo Build failed
 )

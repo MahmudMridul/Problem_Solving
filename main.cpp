@@ -75,67 +75,17 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
-int minimum(vector<int> arr, int size)
+
+void solve(vector<lli>& nums, lli size, lli z) 
 {
-    int min = 5000;
-    int minIndex = -1;
-    for(int i = 0; i<size; ++i)
-    {
-        if(arr[i] < min)
-        {
-            min = arr[i];
-            minIndex = i;
-        }
-    }
-    return minIndex;
-}
+    lli maxNum = INT_MIN;
 
-int maximum(vector<int> arr, int size)
-{
-    int max = -5000;
-    int maxIndex = -1;
-    for(int i = 0; i<size; ++i)
+    for(lli i = 0; i < size; ++i)
     {
-        if(arr[i] > max)
-        {
-            max = arr[i];
-            maxIndex = i;
-        }
-    }
-    return maxIndex;
-}
-
-
-void solve(vector<int> arr, int size) 
-{
-    if(size == 1) 
-    {
-        ol(0);
-        return;
+        maxNum = nums[i] > maxNum ? nums[i] : maxNum;
     }
 
-    int minIndex = minimum(arr, size);
-    int maxIndex = maximum(arr, size);
-
-    if(minIndex == 0 && maxIndex == size - 1)
-    {
-        ol(arr[maxIndex] - arr[minIndex]);
-        return;
-    }
-    if(maxIndex + 1 == minIndex)
-    {
-        ol(arr[maxIndex] - arr[minIndex]);
-        return;
-    }
-    if(maxIndex + 1 < size && arr[minIndex] == arr[maxIndex + 1])
-    {
-        ol(arr[maxIndex] - arr[minIndex]);
-        return;
-    }
-
-    int maxPossible = max(arr[maxIndex] - arr[0], arr[size - 1] - arr[minIndex]);
-    ol(maxPossible);
-
+    ol((maxNum | z));
 }
 
 
@@ -151,16 +101,15 @@ int main()
     #endif
 
 
-    int test, size;
+    lli test, size, z;
     i1(test);
 
     while(test--)
     {
-        vector<int> arr;
-        //int arr[size]; 
-        i1(size);
-        readVector(arr, size);
-        solve(arr, size);
+        i2(size, z);
+        vector<lli> nums;
+        readVector(nums, size);
+        solve(nums, size, z);
     }
 
     #ifndef ONLINE_JUDGE

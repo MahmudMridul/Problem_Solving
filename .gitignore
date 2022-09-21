@@ -2,11 +2,10 @@
 *.exe
 
 # Input output files
-input.txt
-output.txt
-expected.txt
-testresult.txt
+*.txt
 
 # Test file
-Test.xlsx
+*.xlsx
+
+
 

@@ -11,12 +11,6 @@
 #define o(x) cout << x
 #define ol(x) cout << x << "\n"
 
-#define ulli unsigned long long int //64
-#define lli long long int //64
-#define uli unsigned long int //32
-#define li long int //32
-#define pi 3.1415926535897932384626433832795
-
 using namespace std;
 
 template<typename type>
@@ -70,16 +64,29 @@ type clearBitsRange(type number, type left, type right)
 }
 
 template<typename type>
-bool isPowerofTwo(type number)
+bool isPowerofTwo(type n)
 {
     return n & (n - 1) == 0;
+}
+
+template<typename type>
+type countSetBits(type number)
+{
+    int count = 0;
+
+    while(number > 0)
+    {
+        number = number & (number - 1);
+        ++count;
+    }
+    return count;
 }
 
 // bit starts from 0
 int main()
 {
-    int num = 31;
-    int n = clearBitsRange(num, 3, 1);
+    int num = 10;
+    int n = countSetBits(num);
     ol(n);
     return 0;
 }

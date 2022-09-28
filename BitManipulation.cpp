@@ -86,7 +86,11 @@ type countSetBits(type number)
 int main()
 {
     int num = 10;
+    bitset<8> bits;
+    ol(bits);
     int n = countSetBits(num);
-    ol(n);
+    bits.set(3,1);
+    ol(bits);
+    //ol(n);
     return 0;
 }

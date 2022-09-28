@@ -2,26 +2,11 @@
 
 #include <bits/stdc++.h>
 
-#define fast ios_base::sync_with_stdio(false)
-#define clr cin.tie(NULL)
-
-#define i1(x) cin >> x
-#define i2(x,y) cin >> x >> y
-#define i3(x,y,z) cin >> x >> y >> z
-#define i4(w,x,y,z) cin >> w >> x >> y >> z
-#define i5(w,x,y,z,a) cin >> w >> x >> y >> z >> a
-#define i6(w,x,y,z,a,b) cin >> w >> x >> y >> z >> a >> b
-
-#define min_pq(x) priority_queue<x, vector<x>, greater<x> >
-#define max_pq(x) priority_queue<x>
-
 #define t_st clock_t start = clock();
 #define t_en clock_t stop = clock();
 #define t_p double duration = double(stop-start) / double(CLOCKS_PER_SEC); printf("RUNTIME: %.10f\n",duration);
 
-#define os(x) cout << x << " "
-#define o(x) cout << x
-#define ol(x) cout << x << "\n"
+#define endline "\n"
 
 #define ulli unsigned long long int //64
 #define lli long long int //64
@@ -75,24 +60,17 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { os(vec[i].first); ol(vec[i].second); }
 }
 
-
-void solve(vector<lli>& nums, lli size, lli z) 
+// SOLVE : https://codeforces.com/problemset/problem/1195/A
+void solve(int n, int k)
 {
-    lli maxNum = INT_MIN;
-
-    for(lli i = 0; i < size; ++i)
-    {
-        maxNum = nums[i] > maxNum ? nums[i] : maxNum;
-    }
-
-    ol((maxNum | z));
+    
 }
 
 
 int main()
 {
-    fast;
-    clr;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
     #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -100,16 +78,13 @@ int main()
     t_st
     #endif
 
-
-    lli test, size, z;
-    i1(test);
+    int test = 1, n, k;
+    //i1(test);
 
     while(test--)
     {
-        i2(size, z);
-        vector<lli> nums;
-        readVector(nums, size);
-        solve(nums, size, z);
+        i2(n, k);
+        solve(n, k);
     }
 
     #ifndef ONLINE_JUDGE

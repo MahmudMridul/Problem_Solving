@@ -28,8 +28,8 @@ deque<char> add(string a, string b)
         }
         else if(dBi >= 0)
         {
-            int dA = a[dAi] - '0';
-            sumD = hasCarry ? dA + 1 : dA;
+            int dB = a[dBi] - '0';
+            sumD = hasCarry ? dB + 1 : dB;
         }
         else break;
 

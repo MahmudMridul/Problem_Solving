@@ -1,15 +1,6 @@
 #include <bits/stdc++.h>
 
-#define i1(x) cin >> x
-#define i2(x,y) cin >> x >> y
-#define i3(x,y,z) cin >> x >> y >> z
-#define i4(w,x,y,z) cin >> w >> x >> y >> z
-#define i5(w,x,y,z,a) cin >> w >> x >> y >> z >> a
-#define i6(w,x,y,z,a,b) cin >> w >> x >> y >> z >> a >> b
-
-#define os(x) cout << x << " "
-#define o(x) cout << x
-#define ol(x) cout << x << "\n"
+#define endline "\n"
 
 using namespace std;
 

@@ -78,10 +78,9 @@ int main()
 {
     int num = 10;
     bitset<8> bits;
-    ol(bits);
+    cout << bits << endline;
     int n = countSetBits(num);
     bits.set(3,1);
-    ol(bits);
-    //ol(n);
+    cout << bits << endline;
     return 0;
 }

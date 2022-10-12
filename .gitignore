@@ -3,6 +3,7 @@
 
 # Input output files
 *.txt
+TextFiles
 
 # Test file
 *.xlsx

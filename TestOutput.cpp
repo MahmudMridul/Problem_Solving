@@ -83,7 +83,7 @@ int main()
     vector<string> output;
     vector<string> expected;
 
-    freopen("expected.txt", "r", stdin);
+    freopen("TextFiles/expected.txt", "r", stdin);
 
     while(getline(cin, str))
     {
@@ -97,7 +97,7 @@ int main()
 
     fclose(stdin);
 
-    freopen("output.txt", "r", stdin);
+    freopen("TextFiles/output.txt", "r", stdin);
 
     while(getline(cin, str))
     {
@@ -113,7 +113,7 @@ int main()
 
     fclose(stdin);
 
-    freopen("testresult.txt", "w", stdout);
+    freopen("TextFiles/testresult.txt", "w", stdout);
 
     if(output.size() != expected.size())
     {

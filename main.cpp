@@ -61,49 +61,34 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
 }
 
 // SOLVE : https://codeforces.com/problemset/problem/1195/A
-void solve(int n, int k)
+void solve(int n, int m)
 {
-    int sets = (int)ceil(n / 2.0);
-    int no = 0;
-
-    vector<int> count(1001);
-    vector< pair<int,int> > c_tp;
-
-    for(int i = 1; i <= n; i++)
+    if(n < 2 || m < 2)
     {
-        int x;
-        cin >> x;
-        ++count[x];
+        cout << n << " " << m << endline;
+        return;
     }
-
-    for (int i = 1; i <= k; ++i)
+    for(int r = 1; r <= n; ++r)
     {
-        if(count[i] > 0)
+        for(int c = 1; c <= m; ++c)
         {
-            c_tp.push_back({count[i], i});
-        }
-    }
-    
-    sort(c_tp.begin(), c_tp.end());
-    
-
-    for(int i = c_tp.size() - 1; i >= 0 && sets > 0; --i)
-    {
-        if(c_tp[i].first > 0)
-        {
-            if((c_tp[i].first&1) == 1 && i > 0 && c_tp[i - 1].first > 0)
+            if( (r-2 < 1 || c-1 < 1) && (r-2 < 1 || c+1 > m) )
             {
-                // i > 0 skips 0th index, that't why maybe?
-                ++no;
-                --c_tp[i - 1].first;   
+                if( (r+2 > n || c-1 < 1) && (r+2 > n || c+1 > m) )
+                {
+                    if( (r-1 < 1 || c-2 < 1) && (r-1 < 1 || c+2 > m) )
+                    {
+                        if( (r+1 > n || c-2 < 1) && (r+1 > n || c+2 > m) )
+                        {
+                            cout << r << " " << c << endline;
+                            return;
+                        }
+                    }
+                }
             }
-            --sets;
         }
     }
-
-    cout << (n - no) << endline;
-    
-    
+    cout << n << " " << m << endline;
 }
 
 
@@ -118,13 +103,13 @@ int main()
     t_st
     #endif
 
-    int test = 1, n, k;
-    //cin >> test;
+    int test, n, m;
+    cin >> test;
 
     while(test--)
     {
-        cin >> n >> k;
-        solve(n, k);
+        cin >> n >> m;
+        solve(n, m);
     }
 
     #ifndef ONLINE_JUDGE

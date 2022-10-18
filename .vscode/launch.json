@@ -5,11 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
+            "type": "node",
             "name": "Launch Main",
             "request": "launch",
-            "mainClass": "Java_Code.Main",
-            "projectName": "Problem_Solving_60cfe4d"
         },
         {
             "name": "g++.exe - Build and debug active file",

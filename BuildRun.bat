@@ -7,6 +7,7 @@ g++ %fileName% -o currentFile && (
     echo Build completed
     echo Running...
     currentFile.exe
+    echo Done
 ) || (
     echo Build failed
 )

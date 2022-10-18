@@ -4,5 +4,6 @@
         "functional": "cpp",
         "vector": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "C_Cpp.autocompleteAddParentheses": true,
 }

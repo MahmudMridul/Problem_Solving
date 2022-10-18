@@ -60,36 +60,68 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { cout << vec[i].first << " " << vec[i].second << endline; }
 }
 
-// SOLVE : https://codeforces.com/problemset/problem/1195/A
-void solve(int n, int m)
+// SOLVE : https://codeforces.com/contest/1742/problem/F
+
+void solve(int q)
 {
-    if(n < 2 || m < 2)
+    int d, k, slen = 1, tlen = 1
+    string x = "", s = "a", t = "a";
+    char biggest_charoft = '0', smallest_charofs = '0', biggest_charofs = '0';
+    bool s_issmaller = false;
+
+    vector<int> s_chars(26);
+    vector<int> t_chars(26);
+
+    s_chars[0] = 1; 
+    t_chars[0] = 1;
+
+    while(q--)
     {
-        cout << n << " " << m << endline;
-        return;
-    }
-    for(int r = 1; r <= n; ++r)
-    {
-        for(int c = 1; c <= m; ++c)
+        cin >> d >> k >> x;
+
+
+        if(d == 1) //append to s
         {
-            if( (r-2 < 1 || c-1 < 1) && (r-2 < 1 || c+1 > m) )
+            for(int i = 0; i < x.length(); ++i)
             {
-                if( (r+2 > n || c-1 < 1) && (r+2 > n || c+1 > m) )
-                {
-                    if( (r-1 < 1 || c-2 < 1) && (r-1 < 1 || c+2 > m) )
-                    {
-                        if( (r+1 > n || c-2 < 1) && (r+1 > n || c+2 > m) )
-                        {
-                            cout << r << " " << c << endline;
-                            return;
-                        }
-                    }
-                }
+                s_chars[x[i] - 'a'] += k;
+                slen += k;
             }
         }
+        else //append to t 
+        {
+            for(int i = 0; i < x.length(); ++i)
+            {
+                t_chars[x[i] - 'a'] += k;
+                tlen += k;
+            }
+        }
+
+        for(int i = 25; i >= 0; --i)
+        {
+            if(t_chars[i] > 0) { biggest_charoft = 'a' + i; break; }
+        }
+
+        for(int i = 0; i < 26; ++i)
+        {
+            if(s_chars[i] > 0) { smallest_charofs = 'a' + i; break; }
+        }
+
+        for(int i = 25; i >= 0; --i)
+        {
+            if(s_chars[i] > 0) { smallest_charofs = 'a' + i; break; }
+        }
+
+        if(smallest_charofs < biggest_charoft) { s_issmaller = true; }
+        else if(smallest_charofs > biggest_charoft) { s_issmaller = false; }
+        else if(smallest_charofs == biggest_charofs && slen >= tlen) { false; }
+        else if(smallest_charofs == biggest_charofs && slen < tlen) { true; }
+
+        if(s_issmaller) { cout << "YES" << endline; }
+        else { cout << "NO" << endline; }
     }
-    cout << n << " " << m << endline;
 }
+
 
 
 int main()
@@ -98,18 +130,18 @@ int main()
     cin.tie(NULL);
 
     #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("TextFiles/input.txt", "r", stdin);
+    freopen("TextFiles/output.txt", "w", stdout);
     t_st
     #endif
 
-    int test, n, m;
+    int test, q;
     cin >> test;
 
     while(test--)
     {
-        cin >> n >> m;
-        solve(n, m);
+        cin >> q;
+        solve(q);
     }
 
     #ifndef ONLINE_JUDGE

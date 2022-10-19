@@ -60,6 +60,13 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { cout << vec[i].first << " " << vec[i].second << endline; }
 }
 
+//for customized sort: sort(begin, end, compare)
+//if x should appear before y then return true
+bool compare(int x, int y) 
+{
+    return false;
+}
+
 // SOLVE : https://codeforces.com/contest/1742/problem/F
 
 void solve(vector<int>& arr, int n)
@@ -95,6 +102,14 @@ void solve(vector<int>& arr, int n)
     }
 
     printVector(pre, pre.size());
+    cout << "===================" << endline;
+
+    cout << pre[0] << " ";
+    for(int i = 1; i < pre.size(); ++i)
+    {
+        cout << pre[i] << " ";
+    }
+    cout << endline;
 
 
 }

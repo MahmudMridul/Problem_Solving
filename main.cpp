@@ -62,64 +62,41 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
 
 // SOLVE : https://codeforces.com/contest/1742/problem/F
 
-void solve(int q)
+void solve(vector<int>& arr, int n)
 {
-    int d, k, slen = 1, tlen = 1
-    string x = "", s = "a", t = "a";
-    char biggest_charoft = '0', smallest_charofs = '0', biggest_charofs = '0';
-    bool s_issmaller = false;
+    vector<int> pre;
 
-    vector<int> s_chars(26);
-    vector<int> t_chars(26);
+    sort(arr.begin(), arr.end());
+    pre.push_back(arr[n - 1]);
+    int val = arr[n - 1];
+    
+    arr[n - 1] = -1;
 
-    s_chars[0] = 1; 
-    t_chars[0] = 1;
-
-    while(q--)
+    for(int c = 1; c <= n - 1; ++c)
     {
-        cin >> d >> k >> x;
-
-
-        if(d == 1) //append to s
+        int max_val = -1;
+        int max_val_in = 0;
+        for(int i = n - 1; i >= 0; --i)
         {
-            for(int i = 0; i < x.length(); ++i)
+            if(arr[i] != -1)
             {
-                s_chars[x[i] - 'a'] += k;
-                slen += k;
+                int temp = val | arr[i];
+                if(temp >= max_val)
+                {
+                    max_val = val | arr[i];
+                    max_val_in = i;
+                }
             }
         }
-        else //append to t 
-        {
-            for(int i = 0; i < x.length(); ++i)
-            {
-                t_chars[x[i] - 'a'] += k;
-                tlen += k;
-            }
-        }
+        val = val | arr[max_val_in];
+        pre.push_back(arr[max_val_in]);
+        arr[max_val_in] = -1;
 
-        for(int i = 25; i >= 0; --i)
-        {
-            if(t_chars[i] > 0) { biggest_charoft = 'a' + i; break; }
-        }
-
-        for(int i = 0; i < 26; ++i)
-        {
-            if(s_chars[i] > 0) { smallest_charofs = 'a' + i; break; }
-        }
-
-        for(int i = 25; i >= 0; --i)
-        {
-            if(s_chars[i] > 0) { smallest_charofs = 'a' + i; break; }
-        }
-
-        if(smallest_charofs < biggest_charoft) { s_issmaller = true; }
-        else if(smallest_charofs > biggest_charoft) { s_issmaller = false; }
-        else if(smallest_charofs == biggest_charofs && slen >= tlen) { false; }
-        else if(smallest_charofs == biggest_charofs && slen < tlen) { true; }
-
-        if(s_issmaller) { cout << "YES" << endline; }
-        else { cout << "NO" << endline; }
     }
+
+    printVector(pre, pre.size());
+
+
 }
 
 
@@ -127,7 +104,8 @@ void solve(int q)
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(0);
+    cout.tie(0);
 
     #ifndef ONLINE_JUDGE
     freopen("TextFiles/input.txt", "r", stdin);
@@ -135,13 +113,15 @@ int main()
     t_st
     #endif
 
-    int test, q;
+    int test, n;
     cin >> test;
 
     while(test--)
     {
-        cin >> q;
-        solve(q);
+        cin >> n;
+        vector<int> arr;
+        readVector(arr, n);
+        solve(arr, n);
     }
 
     #ifndef ONLINE_JUDGE

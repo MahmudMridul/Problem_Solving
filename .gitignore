@@ -8,5 +8,8 @@ TextFiles
 # Test file
 *.xlsx
 
+# Videos
+*.mp4
+
 
 

@@ -60,26 +60,21 @@ void printVectorPair(vector< pair<type, type> >& vec, int size)
     for(int i=0; i<size; ++i) { cout << vec[i].first << " " << vec[i].second << endline; }
 }
 
-//for customized sort: sort(begin, end, compare)
-//if x should appear before y then return true
-bool compare(int x, int y) 
-{
-    return false;
-}
-
 // SOLVE : https://codeforces.com/contest/1742/problem/F
 
 void solve(vector<int>& arr, int n)
 {
     vector<int> pre;
 
-    sort(arr.begin(), arr.end());
-    pre.push_back(arr[n - 1]);
-    int val = arr[n - 1];
+    sort(arr.begin(), arr.end(), greater<int>());
+    pre.push_back(arr[0]);
+    int val = arr[0];
     
-    arr[n - 1] = -1;
+    arr[0] = -1;
 
-    for(int c = 1; c <= n - 1; ++c)
+    int upto = ceil(log2(n));
+
+    for(int c = 1; c <= min(upto, n - 1); ++c)
     {
         int max_val = -1;
         int max_val_in = 0;
@@ -101,15 +96,15 @@ void solve(vector<int>& arr, int n)
 
     }
 
-    printVector(pre, pre.size());
-    cout << "===================" << endline;
-
-    cout << pre[0] << " ";
-    for(int i = 1; i < pre.size(); ++i)
+    for(int i = 0; i < n; ++i)
     {
-        cout << pre[i] << " ";
+        if(arr[i] != -1)
+        {
+            pre.push_back(arr[i]);
+        }
     }
-    cout << endline;
+
+    printVector(pre, pre.size());
 
 
 }

@@ -70,9 +70,29 @@ void tokenize(string str, char delim)
 }
 
 
-void solve(vector<char>& stamp, int size)
+void solve(string stamp, int size)
 {
-    tokenize("RBWBWRRBW", 'W');
+    stringstream ss(stamp);
+    string word;
+
+    while(!ss.eof())
+    {
+        getline(ss, word, 'W');
+        int word_len = word.length();
+        int b_count = 0, r_count = 0;
+
+        if(word_len > 0)
+        {
+            for(int i = 0; i < word_len; ++i)
+            {
+                if(word[i] == 'B') ++b_count;
+                else if(word[i] == 'R') ++r_count;
+            }
+
+            if(b_count == word_len || r_count == word_len) { cout << "no" << endline; return; }
+        }
+    }
+    cout << "yes" << endline;
 }
 
 
@@ -93,8 +113,8 @@ int main()
     while(test--)
     {
         cin >> n;
-        vector<char> stamp;
-        readVector(stamp, n);
+        string stamp;
+        cin >> stamp;
         solve(stamp, n);
     }
 
